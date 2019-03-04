@@ -52,7 +52,7 @@ if (!file_exists($image)) {
          t.ex. order-form.php?id=1 -->
     <a href="order-form.php?id=<?php echo $id ?>" 
        class="btn btn-outline-info">
-       Pris: <?php echo $pris; ?>:-
+       Pris: <?php echo $prize; ?>:-
     </a>
   </div>
 </div>

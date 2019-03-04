@@ -7,7 +7,7 @@
 
 $server   = "localhost";
 $username = "root";
-$database = "filmdb";
+$database = "comicbookstore";
 
 try{
     $conn = new PDO("mysql:host=$server;dbname=$database;charset=utf8", $username);
