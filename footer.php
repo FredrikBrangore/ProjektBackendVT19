@@ -8,7 +8,7 @@
   //Lånade denna kod från Mahmud.
 ?> 
 <hr>
-<footer>
+<footer class="text-center">
   Copyright &copy; <?php echo date('Y'); ?>
 </footer>
 </body>
