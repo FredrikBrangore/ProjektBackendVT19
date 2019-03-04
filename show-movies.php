@@ -10,7 +10,7 @@ require_once 'db.php';
 
 // Skapa en SQL-sats
 // Hämta alla filmer från tabellen film
-$stmt = $conn->prepare("SELECT * FROM film");
+$stmt = $conn->prepare("SELECT * FROM comicbooks");
 
 // Kör SQL
 $stmt->execute();
@@ -23,16 +23,15 @@ echo "<div class='row'>";
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) :
 
 // Hämta data från varje rad i tabellen
-$id        = $row['filmid'];
-$titel     = $row['titel'];
-$kategori  = $row['kategori'];
-$huvudroll = $row['huvudroll'];
-$pris      = $row['pris'];
+$id        = $row['cbook_id'];
+$titel     = $row['name'];
+$description  = $row['description'];
+$prize      = $row['prize'];
 
 // Hämta src till en bild från mappen images
-$image = "images/$id.jpg";
+$image = "img/$id.png";
 if (!file_exists($image)) {
-    $image = "images/no-poster.png";
+    $image = "img/no-poster.png";
 } 
 
 ?>
@@ -47,8 +46,7 @@ if (!file_exists($image)) {
   <div class="card-body">
     <h4 class="card-title"><?php echo $titel; ?></h4>
     <p class="card-text">
-    Huvudroll: <?php echo $huvudroll; ?><br>
-    Kategori:  <?php echo $kategori;  ?>
+    Description:  <?php echo $description;  ?>
     </p>
     <!-- Skapa en GET-Länk till en beställningssida (skicka filmid)
          t.ex. order-form.php?id=1 -->
