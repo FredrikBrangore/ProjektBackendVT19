@@ -52,7 +52,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)):
 				         t.ex. order-form.php?id=1 -->
 				    <a href="order-form.php?id=<?php echo $id ?>"
 				       class="btn btn-outline-info">
-				       Pris: <?php echo $prize; ?> :-
+				       Köp för pris: <?php echo $prize; ?> :-
 				    </a>
 				  </div>
 				</div>

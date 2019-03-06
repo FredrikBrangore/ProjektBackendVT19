@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2019 at 10:48 AM
+-- Generation Time: Mar 06, 2019 at 10:28 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -46,7 +46,7 @@ INSERT INTO `comicbooks` (`cbook_id`, `name`, `description`, `prize`) VALUES
 (4, 'Amazing Spider-Man #31', 'Spider-Man is swinging around town when he notices a group of masked men escape by helicopter from a plant that produces atomic devices. As he swings on board and fights the men in the helicopter, they dump the stolen cargo into the water below.', '500kr'),
 (5, 'American Gods #5', 'Shadow joins the search for a missing girl while continuing to learn about the town he is now calling home.', '100kr'),
 (6, 'Arclight #4', 'Formally 8HOUSE: ARCLIGHT. END OF STORY ARC The final chapter of this four-part tale of astral projection and blood magic.', '79kr'),
-(7, 'The Belfry', 'A Horror Comic where you might think that a shadowy, disorienting plane crash on an uncharted island would be the scariest part of The Belfry. But that’s just the beginning.', '150kr'),
+(7, 'The Belfry', 'A Horror Comic where a shadowy, disorienting plane crash on an uncharted island is just the just the beginning of something much much worse.', '150kr'),
 (8, 'Beowulf', 'BEOWULF tells of the tale of a Scandinavian hero in lands that would become what is now Denmark and Sweden and his fight against the monster Grendel.', '250kr'),
 (9, 'Bug! The Adventures of Forager #2', 'Bug’s tumble through dimensions ends up taking him back in time, to the start of General Electric’s mad scheme. In the remote Himalayas, the mad scientist leads his robot army in search of a precious magical metal.', '15kr'),
 (10, 'Captain America #695', 'HOME OF THE BRAVE begins – and Steve Rogers is back in action in the red-white-and-blue! Steve begins a journey across America to restore his tarnished reputation.', '50kr'),
@@ -61,20 +61,19 @@ INSERT INTO `comicbooks` (`cbook_id`, `name`, `description`, `prize`) VALUES
 
 CREATE TABLE `contacts` (
   `contacts_id` int(11) NOT NULL,
-  `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `pass` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `pass` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `tel` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `adress` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `adress` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contacts`
 --
 
-INSERT INTO `contacts` (`contacts_id`, `username`, `pass`, `name`, `tel`, `email`, `adress`) VALUES
-(1, 'test', 'test1', 'test', 'test', 'freddevv@gmail.com', 'test');
+INSERT INTO `contacts` (`contacts_id`, `pass`, `name`, `tel`, `email`, `adress`) VALUES
+(1, 'test1', 'test', 'test', 'freddevv@gmail.com', 'test');
 
 -- --------------------------------------------------------
 
@@ -109,9 +108,7 @@ ALTER TABLE `contacts`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`orders_id`),
-  ADD KEY `cbook_id` (`cbook_id`),
-  ADD KEY `contacts_id` (`contacts_id`);
+  ADD PRIMARY KEY (`orders_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -134,17 +131,6 @@ ALTER TABLE `contacts`
 --
 ALTER TABLE `orders`
   MODIFY `orders_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`cbook_id`) REFERENCES `comicbooks` (`cbook_id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`contacts_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
