@@ -24,5 +24,6 @@ error_reporting(E_ALL);
 </head>
 <body class="container" style="background-color:#ff69b4">
 <h1 class="text-center m-3">
-<a href="register.php" style="text-decoration: none;"><span style="border: 3px solid black; background-color:#fff">"Comicbook Store" School Project.</a>
+<a href="register.php" style="text-decoration: none;"><span style="border: 3px solid black; background-color:#fff">"Comicbook Store" School Project.</span></a>
 </h1>
+<h2 class="text-center m-2"><span style="border: 3px solid black; font-weight: bold; background-color:#fff">We only alow Gmail att this time!</span></h2>
