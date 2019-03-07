@@ -1,16 +1,18 @@
 <?php
-/**********************************************
- *       index.php
- *       Applikationens startsida
- *       Importera nödvändiga scripts
- **********************************************/
+// start a session
+session_start();
 
+// manipulate session variables
+/**********************************************
+ *       Applikationens Köpsida
+ *       
+ **********************************************/
 
 // Hämta sidhuvud
 require_once 'header.php';
 
 // Visa alla filmer
-require_once 'login.php';
+require_once 'show-comics.php';
 
 // Hämta sidfot
 require_once 'footer.php';

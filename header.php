@@ -12,7 +12,12 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 // include 'debug.php';
 
-//Lånade denna kod från Mahmud.
+// startar en session
+session_start();
+
+// Manipulerar session variabler
+
+//Lånade denna kod delvis från Mahmud.
 ?>
 <!doctype html>
 <html lang="sv">
@@ -22,8 +27,8 @@ error_reporting(E_ALL);
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/sketchy/bootstrap.min.css">
   <title>"Comicbooks"</title>
 </head>
-<body class="container" style="background-color:#ff69b4">
+<body class="container" style="background-color:#ff69b4; ">
 <h1 class="text-center m-3">
 <a href="register.php" style="text-decoration: none;"><span style="border: 3px solid black; background-color:#fff">"Comicbook Store" School Project.</span></a>
 </h1>
-<h2 class="text-center m-2"><span style="border: 3px solid black; font-weight: bold; background-color:#fff">We only alow Gmail att this time!</span></h2>
+

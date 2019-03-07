@@ -9,7 +9,7 @@
 ?> 
 <hr>
 <footer class="text-center">
-  Copyright &copy; <?php echo date('Y'); ?>
+  Copyright Fredrik Mathias Mikael &copy; <?php echo date('Y'); ?>
 </footer>
 </body>
 </html>

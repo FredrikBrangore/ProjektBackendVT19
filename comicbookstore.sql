@@ -60,20 +60,13 @@ INSERT INTO `comicbooks` (`cbook_id`, `name`, `description`, `prize`) VALUES
 --
 
 CREATE TABLE `contacts` (
-  `contacts_id` int(11) NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `pass` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `tel` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `adress` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `contacts`
---
-
-INSERT INTO `contacts` (`contacts_id`, `pass`, `name`, `tel`, `email`, `adress`) VALUES
-(1, 'test1', 'test', 'test', 'freddevv@gmail.com', 'test');
 
 -- --------------------------------------------------------
 
@@ -83,8 +76,8 @@ INSERT INTO `contacts` (`contacts_id`, `pass`, `name`, `tel`, `email`, `adress`)
 
 CREATE TABLE `orders` (
   `orders_id` int(11) NOT NULL,
-  `cbook_id` int(11) DEFAULT NULL,
-  `contacts_id` int(11) DEFAULT NULL,
+  `cbook_id` int(11) NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -102,7 +95,7 @@ ALTER TABLE `comicbooks`
 -- Indexes for table `contacts`
 --
 ALTER TABLE `contacts`
-  ADD PRIMARY KEY (`contacts_id`);
+  ADD PRIMARY KEY (`email`);
 
 --
 -- Indexes for table `orders`
@@ -119,12 +112,6 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `comicbooks`
   MODIFY `cbook_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `contacts`
---
-ALTER TABLE `contacts`
-  MODIFY `contacts_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
