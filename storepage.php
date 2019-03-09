@@ -1,8 +1,4 @@
 <?php
-// start a session
-session_start();
-
-// manipulate session variables
 /**********************************************
  *       Applikationens Köpsida
  *       

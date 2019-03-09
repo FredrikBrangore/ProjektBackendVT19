@@ -23,7 +23,8 @@ require_once 'header.php';
     <input type="password" required
            class="form-control mt-2"
            placeholder="Write your Password"
-           name="pass">
+           name="pass"id="myInput">
+           <input type="checkbox" onclick="myFunction()">Show Password
   </div>
   <div class="col-md-4">
     <input type="text" required
@@ -46,7 +47,16 @@ require_once 'header.php';
 
 </div> <!-- form-row -->
 </form>
-
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 <?php
 
 // 2. Arbeta med data som skickas via formuläret
@@ -68,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'):
     // Validera data (Backend validering)
     if (empty($name) or empty($tel) or empty($email) or empty($adress) or empty($pass)) {
         echo '<div class="alert alert-danger">
-	    Du får inte ha tomma fält!</div>';
+		    Du får inte ha tomma fält!</div>';
     } elseif (strlen($name) < 3 or strlen($name) > 50) {
     echo '<div class="alert alert-danger">
     Namnet måste vara mer än 2 tecken eller max 50.
@@ -92,28 +102,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'):
 } else {
     // Logga in i databasen
     require_once 'db.php';
+    
+    $stmt = $conn->prepare("SELECT email FROM contacts where email = '$email'");
+    $stmt->execute();
+    /* Fetch all of the remaining rows in the result set */
+    // print("Fetch all of the remaining rows in the result set:\n");
+    $result = $stmt->fetch(PDO::FETCH_OBJ);
+    print_r($result);
+    echo $email;
 
-
-
-
-    if (isset($_POST['email'])) {
-      echo '<div class="alert alert-danger">
+    if ($result->email == $email) {
+        echo '<div class="alert alert-danger">
       Denna Email finns redan använd en annan!.
       </div>';
-  } else {
-      // Förbered en SQL-sats
-      $stmt = $conn->prepare("INSERT INTO contacts (name,tel,pass,email,adress)
+    } else {
+        // Förbered en SQL-sats
+        $stmt = $conn->prepare("INSERT INTO contacts (name,tel,pass,email,adress)
                                   VALUES (:name, :tel, :pass, :email, :adress) ");
-      // Binda variabler till params, som finns i VALUES()
-      $stmt->bindParam(':name', $name);
-      $stmt->bindParam(':tel', $tel);
-      $stmt->bindParam(':pass', $pass);
-      $stmt->bindParam(':email', $email);
-      $stmt->bindParam(':adress', $adress);
-      // Skicka SQL till databasen
-      $stmt->execute();
-      header('Location: index.php');
-  }
+        // Binda variabler till params, som finns i VALUES()
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':tel', $tel);
+        $stmt->bindParam(':pass', $pass);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':adress', $adress);
+        // Skicka SQL till databasen
+        $stmt->execute();
+        header('Location: index.php');
+    }
 } // Avlusta if som validerar data
 endif;
 
