@@ -3,6 +3,7 @@
 // Hämta Head
 require_once 'header.php';
 
+session_unset();
 ?>
 
 <form action="#" method="POST">
@@ -46,8 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'):
     // Hämta värden (values) från olika input-fält
     $email = $_POST['email'];
     $pass = $_POST['pass'];
-    $emailtest = '';
-    $passtest = '';
+
 
     // Rensa data
     $email = filter_var($email, FILTER_SANITIZE_STRING);
@@ -58,32 +58,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'):
         echo '<div class="alert alert-danger">
 													    No empty fields please!</div>';
     } else {
-        // Logga in i databasen
-        require_once 'db.php';
-        $stmt = $conn->prepare("SELECT email, adress, name FROM contacts WHERE email = '$email' AND pass = '$pass'");
+      // Logga in i databasen
+
+
+      require_once 'db.php';
+      $stmt = $conn->prepare("SELECT pass FROM contacts WHERE email = '$email'");
+      $stmt->execute();
+      $result = $stmt->fetch(PDO::FETCH_OBJ);
+      
+      echo $result->pass;
+      if (password_verify($pass, $result->pass)) {
+        echo 'Password is valid!';
+        $stmt = $conn->prepare("SELECT email, adress, name FROM contacts WHERE email = '$email' AND pass = '$result->pass'");
         $stmt->execute();
         /* Fetch all of the remaining rows in the result set */
         // print("Fetch all of the remaining rows in the result set:\n");
-        $result = $stmt->fetch(PDO::FETCH_OBJ);
-        print_r($result);
+        $result1 = $stmt->fetch(PDO::FETCH_OBJ);
+        
+        echo '<hr>';
+        print_r($result1);
+        echo '<hr>';
         echo $email;
-
-        if ($result->email == $email) {
-            $_SESSION["email"] = $email;
-            $_SESSION["adress"] = $result->adress;
-            $_SESSION["name"] = $result->name;
-            //echo '<div class="alert alert-danger">Det Funkar!</div>';
-            //echo "Favorite gmail is " . $_SESSION["email"] . ".<br>";
-            //echo "Favorite adress is " . $_SESSION["adress"] . ".<br>";
-            //echo "Favorite name is " . $_SESSION["name"] . ".";
-            //header('Location: storepage.php');
+        
+        if ($result1->email == $email) {
+          $_SESSION["email"] = $email;
+          $_SESSION["adress"] = $result1->adress;
+          $_SESSION["name"] = $result1->name;
+          //echo '<div class="alert alert-danger">Det Funkar!</div>';
+          echo '<hr>';
+          echo "Favorite gmail is " . $_SESSION["email"] . ".<br>";
+          echo "Favorite adress is " . $_SESSION["adress"] . ".<br>";
+          echo "Favorite name is " . $_SESSION["name"] . ".";
+          //header('Location: storepage.php');
         } else {
-            echo '<div class="alert alert-danger">
-			            That Email does not exist if it should check spelling or the password might be wrong please try again.
-			            </div>';
+          echo '<div class="alert alert-danger">
+          That Email does not exist if it should check spelling or the password might be wrong please try again.
+          </div>';
         }
-
-    } // Avlusta if som validerar data
+      } 
+      else {
+        echo '<div class="alert alert-danger">
+        That password is wrong if it should exist check spelling.
+        </div>';
+      }
+        
+      } // Avlusta if som validerar data
 endif;
 
 // Hämta sidfot

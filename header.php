@@ -28,7 +28,6 @@ session_start();
   <title>"Comicbooks"</title>
 </head>
 <body class="container" style="background-color:#ff69b4; ">
-<h1 class="text-center m-3">
-<a href="register.php" style="text-decoration: none;"><span style="border: 3px solid black; background-color:#fff">"Comicbook Store" School Project.</span></a>
-</h1>
 
+<h1 class="text-center m-3 " style="text-decoration: none;"><span style="border: 3px solid black; background-color:#fff">"Comicbook Store" School Project.</span>
+</h1>
